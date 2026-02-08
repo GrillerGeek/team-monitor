@@ -7,6 +7,7 @@ Always prints {} to stdout and exits 0.
 import sys
 import os
 import json
+import traceback
 
 try:
     PLUGIN_ROOT = os.environ.get('CLAUDE_PLUGIN_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +30,20 @@ try:
     notify_sse(event_dict)
 
 except Exception:
-    pass
+    try:
+        log_path = os.path.join(
+            os.environ.get('CLAUDE_PLUGIN_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            'data', 'hook_errors.log'
+        )
+        os.makedirs(os.path.dirname(log_path), exist_ok=True)
+        with open(log_path, 'a', encoding='utf-8') as f:
+            f.write(f"=== notification_hook ===\n")
+            f.write(f"PLUGIN_ROOT={os.environ.get('CLAUDE_PLUGIN_ROOT', 'NOT SET')}\n")
+            f.write(f"__file__={os.path.abspath(__file__)}\n")
+            traceback.print_exc(file=f)
+            f.write("\n")
+    except Exception:
+        pass
 
 print("{}")
 sys.exit(0)
