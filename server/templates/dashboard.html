@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="app">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">Team Monitor</div>
+        <div class="header-status">
+            <span id="status-dot" class="status-dot"></span>
+            <span id="status-text">Connecting...</span>
+        </div>
+        <div id="header-count" class="header-count">0 events</div>
+    </header>
+
+    <!-- Agent Cards Row -->
+    <div id="agents-row" class="agents-row">
+        <div class="agents-empty">No agents detected yet</div>
+    </div>
+
+    <!-- Main Content: Feed + Sidebar -->
+    <div class="main-content">
+        <div class="feed-container">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <label for="filter-category">Category</label>
+                <select id="filter-category">
+                    <option value="">All</option>
+                    <option value="communication">Communication</option>
+                    <option value="task_management">Task Management</option>
+                    <option value="tool_use">Tool Use</option>
+                    <option value="lifecycle">Lifecycle</option>
+                </select>
+
+                <label for="filter-agent">Agent</label>
+                <select id="filter-agent">
+                    <option value="">All</option>
+                </select>
+
+                <label for="filter-tool">Tool</label>
+                <select id="filter-tool">
+                    <option value="">All</option>
+                </select>
+
+                <button id="btn-clear-filters" class="btn-clear-filters">Clear Filters</button>
+            </div>
+
+            <!-- New Events Indicator -->
+            <div id="new-events-indicator" class="new-events-indicator"></div>
+
+            <!-- Event Feed -->
+            <div id="event-feed" class="event-feed">
+                <div class="feed-empty">No events yet. Waiting for activity...</div>
+            </div>
+        </div>
+
+        <!-- Stats Sidebar -->
+        <aside class="stats-sidebar">
+            <div class="stats-section">
+                <div class="stats-section-title">Overview</div>
+                <div class="stat-item">
+                    <div class="stat-label">Total Events</div>
+                    <div id="stat-total" class="stat-value">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Events / Minute</div>
+                    <div id="stat-rate" class="stat-value">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Most Active Agent</div>
+                    <div id="stat-most-active" class="stat-value small">-</div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-section-title">By Category</div>
+                <div id="category-bars" class="category-bars"></div>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

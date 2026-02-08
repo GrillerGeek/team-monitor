@@ -1,0 +1,5 @@
+{
+  "name": "team-monitor",
+  "description": "Real-time dashboard for monitoring Claude Code agent team activity",
+  "version": "1.0.0"
+}
