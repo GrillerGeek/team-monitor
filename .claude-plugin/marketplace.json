@@ -1,4 +1,8 @@
 {
+  "name": "team-monitor-marketplace",
+  "owner": {
+    "name": "GrillerGeek"
+  },
   "plugins": [
     {
       "name": "team-monitor",
