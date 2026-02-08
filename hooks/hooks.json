@@ -2,26 +2,42 @@
   "hooks": {
     "PostToolUse": [
       {
-        "type": "command",
-        "command": "python \"$CLAUDE_PLUGIN_ROOT/hooks/posttooluse_hook.py\""
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/posttooluse_hook.py\""
+          }
+        ]
       }
     ],
     "Stop": [
       {
-        "type": "command",
-        "command": "python \"$CLAUDE_PLUGIN_ROOT/hooks/stop_hook.py\""
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/stop_hook.py\""
+          }
+        ]
       }
     ],
     "SubagentStop": [
       {
-        "type": "command",
-        "command": "python \"$CLAUDE_PLUGIN_ROOT/hooks/stop_hook.py\""
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/stop_hook.py\""
+          }
+        ]
       }
     ],
     "Notification": [
       {
-        "type": "command",
-        "command": "python \"$CLAUDE_PLUGIN_ROOT/hooks/notification_hook.py\""
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/notification_hook.py\""
+          }
+        ]
       }
     ]
   }
