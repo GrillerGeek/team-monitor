@@ -9,6 +9,20 @@ PLUGIN_ROOT = os.environ.get('CLAUDE_PLUGIN_ROOT') or os.path.dirname(os.path.di
 PID_FILE = os.path.join(PLUGIN_ROOT, 'data', 'server.pid')
 
 
+def ensure_dependencies():
+    """Install Flask if it's not available."""
+    try:
+        import flask  # noqa: F401
+    except ImportError:
+        print('Flask not found. Installing...')
+        req_file = os.path.join(PLUGIN_ROOT, 'requirements.txt')
+        subprocess.check_call(
+            [sys.executable, '-m', 'pip', 'install', '-r', req_file],
+            stdout=subprocess.DEVNULL,
+        )
+        print('Flask installed successfully.')
+
+
 def is_process_alive(pid):
     """Check if a process with the given PID is still running."""
     try:
@@ -93,6 +107,7 @@ def main():
     if args.status:
         show_status()
     else:
+        ensure_dependencies()
         start_server(args.port)
 
 

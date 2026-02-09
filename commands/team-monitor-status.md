@@ -3,7 +3,7 @@ Show the current status of the Team Monitor dashboard.
 First, check if the server is running:
 
 ```
-python "${CLAUDE_PLUGIN_ROOT}/scripts/start_server.py" --status
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/start_server.py" --status
 ```
 
 If the server is running, query the stats API for a summary:
