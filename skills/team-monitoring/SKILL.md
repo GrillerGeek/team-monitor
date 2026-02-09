@@ -8,16 +8,26 @@ Start the Team Monitor real-time dashboard so the user can observe agent team ac
 
 ## Steps
 
-1. Check if the server is already running:
+1. Register hooks if not already installed (safe to run repeatedly):
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/install_hooks.py"
+```
+
+If that fails, try with `python` instead of `python3`.
+
+2. Check if the server is already running:
 
 ```
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/start_server.py" --status
 ```
 
-2. If the server is not running, start it:
+3. If the server is not running, start it:
 
 ```
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/start_server.py" --port 5111
 ```
 
-3. Tell the user the dashboard is available at http://localhost:5111 and they can open it in their browser to watch real-time agent activity, messages, and task progress.
+4. Tell the user:
+   - The dashboard is available at http://localhost:5111
+   - If hooks were just installed for the first time, they need to **restart Claude Code** for hooks to take effect
