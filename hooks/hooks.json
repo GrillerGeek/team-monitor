@@ -10,6 +10,16 @@
         ]
       }
     ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/subagentstart_hook.py\" 2>/dev/null || python \"${CLAUDE_PLUGIN_ROOT}/hooks/subagentstart_hook.py\""
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [

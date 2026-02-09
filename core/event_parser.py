@@ -98,6 +98,9 @@ def _classify(tool_name, hook_event, tool_input, tool_result):
     # Lifecycle events (by hook_event_name)
     if hook_event == 'Stop':
         return 'lifecycle', 'Agent stopped'
+    if hook_event == 'SubagentStart':
+        agent = tool_input.get('name', '') or tool_input.get('description', '')[:40] if tool_input.get('description') else ''
+        return 'lifecycle', f'Subagent started: {agent}' if agent else 'Subagent started'
     if hook_event == 'SubagentStop':
         return 'lifecycle', 'Subagent stopped'
     if hook_event == 'Notification':
