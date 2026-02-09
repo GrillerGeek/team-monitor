@@ -23,6 +23,30 @@ def ensure_dependencies():
         print('Flask installed successfully.')
 
 
+def ensure_hooks():
+    """Register hooks in ~/.claude/settings.json if not already present."""
+    import json
+    settings_path = os.path.join(os.path.expanduser('~'), '.claude', 'settings.json')
+    marker = 'team-monitor-plugin'
+
+    # Check if hooks are already installed
+    if os.path.exists(settings_path):
+        with open(settings_path, 'r', encoding='utf-8') as f:
+            settings = json.load(f)
+        hooks = settings.get('hooks', {})
+        for entries in hooks.values():
+            if isinstance(entries, list):
+                for e in entries:
+                    if isinstance(e, dict) and e.get('_plugin') == marker:
+                        return  # Already installed
+
+    # Run install_hooks.py
+    install_script = os.path.join(PLUGIN_ROOT, 'scripts', 'install_hooks.py')
+    if os.path.exists(install_script):
+        subprocess.check_call([sys.executable, install_script])
+        print('NOTE: Restart Claude Code for hooks to take effect.')
+
+
 def is_process_alive(pid):
     """Check if a process with the given PID is still running."""
     try:
@@ -108,6 +132,7 @@ def main():
         show_status()
     else:
         ensure_dependencies()
+        ensure_hooks()
         start_server(args.port)
 
 
